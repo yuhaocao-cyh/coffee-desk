@@ -1,8 +1,9 @@
-import { type NextRequest } from "next/server";
-import { updateSession } from "@/lib/supabase/middleware";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+/** 免登录模式：中间件仅做通行 */
+export async function middleware(_request: NextRequest) {
+  return NextResponse.next();
 }
 
 export const config = {

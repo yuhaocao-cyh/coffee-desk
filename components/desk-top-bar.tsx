@@ -1,50 +1,49 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { createBrowserSupabase } from "@/lib/supabase/client";
+import { usePathname } from "next/navigation";
 
-/** 工作台顶栏：账号信息与退出登录 */
-export function DeskTopBar({ email }: { email: string }) {
-  const router = useRouter();
+/** 工作台顶栏：导航 */
+export function DeskTopBar() {
+  const pathname = usePathname();
 
-  async function onSignOut() {
-    const supabase = createBrowserSupabase();
-    if (supabase) await supabase.auth.signOut();
-    router.push("/");
-    router.refresh();
-  }
+  const navLinks = [
+    { href: "/desk", label: "工作台" },
+    { href: "/dashboard", label: "数据看板" },
+    { href: "/admin/lots", label: "管理后台" },
+  ];
 
   return (
     <header className="sticky top-0 z-40 border-b border-amber-900/10 bg-[#1a120b]/90 text-amber-50 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-4 sm:px-6">
         <div className="flex items-center gap-3">
           <span className="text-2xl" aria-hidden>
             ☕
           </span>
           <div>
-            <p className="text-sm font-semibold tracking-wide">云豆工作台</p>
-            <p className="text-xs text-amber-200/80">多人共享 · 云端保存</p>
+            <p className="text-sm font-semibold tracking-wide">云豆集</p>
+            <p className="text-xs text-amber-200/80">免登录 · 全员协同</p>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          <span className="rounded-full bg-white/10 px-3 py-1 text-amber-100/90">
-            👤 {email}
-          </span>
-          <Link
-            href="/"
-            className="rounded-full border border-white/15 px-3 py-1 text-amber-50/90 hover:bg-white/10"
-          >
-            返回首页
-          </Link>
-          <button
-            type="button"
-            onClick={onSignOut}
-            className="rounded-full bg-amber-500/90 px-3 py-1 font-medium text-stone-900 hover:bg-amber-400"
-          >
-            退出
-          </button>
-        </div>
+
+        <nav className="flex items-center gap-1 text-sm">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-full px-3 py-1 transition ${
+                  isActive
+                    ? "bg-amber-500/20 text-amber-200"
+                    : "text-amber-50/80 hover:bg-white/10"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
     </header>
   );

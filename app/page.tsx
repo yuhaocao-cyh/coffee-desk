@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-/** 落地页：偏展示与引导，数据读写在工作台 /desk */
+/** 落地页 */
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900">
@@ -15,25 +15,13 @@ export default function HomePage() {
           </Link>
           <nav className="flex flex-wrap items-center gap-2 text-sm">
             <Link
-              href="/benji"
+              href="/desk"
               className="rounded-full bg-amber-100 px-3 py-1.5 font-medium text-amber-950 hover:bg-amber-200"
             >
-              本机版（最简单）
+              进入工作台
             </Link>
-            <Link href="/desk" className="rounded-full px-3 py-1.5 text-zinc-600 hover:bg-zinc-100">
-              工作台
-            </Link>
-            <Link
-              href="/login"
-              className="rounded-full border border-zinc-200 px-3 py-1.5 text-zinc-700 hover:bg-zinc-100"
-            >
-              登录
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-full bg-zinc-900 px-3 py-1.5 font-medium text-white hover:bg-zinc-800"
-            >
-              注册
+            <Link href="/dashboard" className="rounded-full px-3 py-1.5 text-zinc-600 hover:bg-zinc-100">
+              数据看板
             </Link>
           </nav>
         </div>
@@ -50,27 +38,16 @@ export default function HomePage() {
               <span className="block text-amber-700">搬到云上一起用</span>
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-zinc-600">
-              不再是「只存在某台电脑里」的表格：注册登录后，{" "}
-              <span className="font-medium text-zinc-800">数据长期保存在 Supabase</span>，团队成员都能查看、登记、留痕。
+              不再是「只存在某台电脑里」的表格：打开网页就能用，{" "}
+              <span className="font-medium text-zinc-800">数据长期保存在 Supabase</span>
+              ，团队成员都能查看、登记、留痕。
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/benji"
-                className="inline-flex items-center justify-center rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-amber-950 shadow-md hover:bg-amber-300"
-              >
-                🧸 本机版（零配置，先点这个）
-              </Link>
-              <Link
-                href="/signup"
+                href="/desk"
                 className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-zinc-900/15 hover:bg-zinc-800"
               >
-                ✨ 云端：注册账号
-              </Link>
-              <Link
-                href="/desk"
-                className="inline-flex items-center justify-center rounded-full border border-zinc-300 bg-white px-6 py-3 text-sm font-semibold text-zinc-800 hover:bg-zinc-50"
-              >
-                进入工作台
+                🚀 进入工作台
               </Link>
             </div>
             <ul className="mt-10 grid gap-3 text-sm text-zinc-600 sm:grid-cols-2">
@@ -80,7 +57,7 @@ export default function HomePage() {
               </li>
               <li className="flex gap-2 rounded-2xl border border-zinc-200/80 bg-white/70 px-3 py-2">
                 <span>👥</span>
-                <span>多人登录，共享同一块登记动态</span>
+                <span>多人共用，免登录直接登记</span>
               </li>
               <li className="flex gap-2 rounded-2xl border border-zinc-200/80 bg-white/70 px-3 py-2">
                 <span>🖼️</span>
@@ -88,7 +65,7 @@ export default function HomePage() {
               </li>
               <li className="flex gap-2 rounded-2xl border border-zinc-200/80 bg-white/70 px-3 py-2">
                 <span>🛡️</span>
-                <span>每人只能删除自己提交的记录</span>
+                <span>订单状态流转 + 库存管理 + 数据看板</span>
               </li>
             </ul>
           </div>
@@ -102,33 +79,18 @@ export default function HomePage() {
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-white/90 p-4 text-sm text-zinc-800 shadow-lg backdrop-blur">
-              <p className="font-medium">📸 首页配图可随意替换</p>
-              <p className="mt-1 text-xs text-zinc-600">当前使用 Unsplash 外链；也可把图片放到 public/ 目录改为本地引用。</p>
-            </div>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-2xl font-semibold tracking-tight">三步上手</h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <h2 className="text-center text-2xl font-semibold tracking-tight">四步上手</h2>
+        <div className="mt-10 grid gap-6 md:grid-cols-4">
           {[
-            {
-              step: "1️⃣",
-              title: "创建 Supabase 项目",
-              desc: "在 supabase.com 新建项目，把 URL 与 anon key 写入 .env.local。",
-            },
-            {
-              step: "2️⃣",
-              title: "执行建表 SQL",
-              desc: "打开 SQL Editor，粘贴仓库内 supabase/migrations/001_init.sql 并运行。",
-            },
-            {
-              step: "3️⃣",
-              title: "npm run dev",
-              desc: "本地启动后注册账号，即可在工作台协同登记。",
-            },
+            { step: "1️⃣", title: "创建 Supabase", desc: "在 supabase.com 新建项目，获取 URL 与 anon key。" },
+            { step: "2️⃣", title: "执行 SQL", desc: "打开 SQL Editor，粘贴仓库内的建表 SQL 并运行。" },
+            { step: "3️⃣", title: "配置环境变量", desc: "将 URL 与 anon key 填入 .env.local。" },
+            { step: "4️⃣", title: "部署上线", desc: "推送到 Vercel，打开链接即可使用。" },
           ].map((c) => (
             <div
               key={c.title}
@@ -146,24 +108,19 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 px-4 sm:flex-row sm:items-center sm:px-6">
           <div>
             <p className="text-sm text-amber-200/80">准备好了吗？</p>
-            <h2 className="mt-2 text-2xl font-semibold">先注册，再打开工作台体验完整流程 🚀</h2>
+            <h2 className="mt-2 text-2xl font-semibold">直接打开工作台开始使用 🚀</h2>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/signup"
-              className="rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-stone-900 hover:bg-amber-300"
-            >
-              立即注册
-            </Link>
-            <Link href="/login" className="rounded-full border border-white/20 px-6 py-3 text-sm hover:bg-white/10">
-              已有账号登录
-            </Link>
-          </div>
+          <Link
+            href="/desk"
+            className="rounded-full bg-amber-400 px-6 py-3 text-sm font-semibold text-stone-900 shadow-lg hover:bg-amber-300"
+          >
+            进入工作台
+          </Link>
         </div>
       </section>
 
       <footer className="border-t border-zinc-200 bg-white py-8 text-center text-xs text-zinc-500">
-        云豆集 · 演示项目 · 图片版权归 Unsplash 摄影师
+        云豆集 · 图片版权归 Unsplash 摄影师
       </footer>
     </div>
   );
